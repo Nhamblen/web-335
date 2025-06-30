@@ -69,7 +69,7 @@ db.houses
 // g. Display all students in the house with an Eagle mascot
 db.houses
   .aggregate([
-    { $match: { mascot: "Eagle" } },
+    { $match: { mascot: "Eagle" } }, // Filters Ravenclaw
     {
       $lookup: {
         from: "students",
@@ -81,7 +81,7 @@ db.houses
     {
       $project: {
         _id: 0,
-        houseName: "$founder", // or "$houseId" if there's no house name field
+        houseName: { $literal: "Ravenclaw" }, // Assign a fixed value
         students: {
           $map: {
             input: "$students",
